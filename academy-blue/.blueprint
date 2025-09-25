@@ -1,0 +1,51 @@
+created:
+    - app/Http/Controllers/CategoryController.php
+    - app/Http/Controllers/CourseController.php
+    - app/Http/Controllers/LessonsController.php
+    - app/Http/Controllers/EnrollmentsController.php
+    - database/factories/UserFactory.php
+    - database/factories/CategoryFactory.php
+    - database/factories/CourseFactory.php
+    - database/factories/LessonFactory.php
+    - database/factories/EnrollmentFactory.php
+    - database/migrations/2025_09_25_133704_create_users_table.php
+    - database/migrations/2025_09_25_133705_create_categories_table.php
+    - database/migrations/2025_09_25_133706_create_courses_table.php
+    - database/migrations/2025_09_25_133707_create_lessons_table.php
+    - database/migrations/2025_09_25_133708_create_enrollments_table.php
+    - app/Models/User.php
+    - app/Models/Category.php
+    - app/Models/Course.php
+    - app/Models/Lesson.php
+    - app/Models/Enrollment.php
+    - tests/Feature/Http/Controllers/CategoryControllerTest.php
+    - tests/Feature/Http/Controllers/CourseControllerTest.php
+    - tests/Feature/Http/Controllers/LessonsControllerTest.php
+    - tests/Feature/Http/Controllers/EnrollmentsControllerTest.php
+    - app/Http/Requests/CategoryStoreRequest.php
+    - app/Http/Requests/CategoryUpdateRequest.php
+    - app/Http/Requests/CourseStoreRequest.php
+    - app/Http/Requests/CourseUpdateRequest.php
+    - app/Http/Requests/LessonStoreRequest.php
+    - app/Http/Requests/LessonUpdateRequest.php
+    - app/Http/Requests/EnrollmentStoreRequest.php
+    - resources/views/category/index.blade.php
+    - resources/views/category/create.blade.php
+    - resources/views/category/edit.blade.php
+    - resources/views/course/index.blade.php
+    - resources/views/course/create.blade.php
+    - resources/views/course/edit.blade.php
+    - resources/views/lesson/index.blade.php
+    - resources/views/lesson/create.blade.php
+    - resources/views/lesson/edit.blade.php
+    - resources/views/enrollment/index.blade.php
+    - resources/views/enrollment/create.blade.php
+    - resources/views/enrollment/edit.blade.php
+updated:
+    - routes/web.php
+models:
+    User: { name: string, email: 'string unique', password: string, role: 'enum:estudiante,instructor,admin', timestamps: timestamps }
+    Category: { name: 'string:100', description: 'text nullable', timestamps: timestamps }
+    Course: { title: 'string:200', description: 'text nullable', price: integer, instructor_id: 'id foreign:users.id onDelete:cascade onUpdate:cascade', category_id: 'id foreign:categories.id onDelete:cascade onUpdate:cascade', timestamps: timestamps }
+    Lesson: { title: 'string:200', content: text, order_number: integer, course_id: 'id foreign onDelete:cascade onUpdate:cascade', timestamps: timestamps }
+    Enrollment: { student_id: 'id foreign:users.id onDelete:cascade onUpdate:cascade', course_id: 'id foreign onDelete:cascade onUpdate:cascade', enrollment_date: timestamps, status: 'enum:activo,completado,cancelado', indexes: [{ unique: 'student_id, course_id' }], timestamps: timestamps }

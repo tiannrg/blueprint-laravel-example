@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::resource('categories', App\Http\Controllers\CategoryController::class)->except('show');
+
+Route::resource('courses', App\Http\Controllers\CourseController::class)->except('show');
+
+Route::resource('lessons', App\Http\Controllers\LessonsController::class)->except('show');
+
+Route::resource('enrollments', App\Http\Controllers\EnrollmentsController::class)->except('update', 'show', 'destroy');

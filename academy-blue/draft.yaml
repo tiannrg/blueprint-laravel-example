@@ -1,0 +1,46 @@
+models:
+  User:
+    name: string
+    email: string unique
+    password: string
+    role: enum:estudiante,instructor,admin
+    timestamps
+
+  Category:
+    name: string:100
+    description: text nullable
+    timestamps
+  
+  Course:
+    title: string:200
+    description: text nullable
+    price: integer
+    instructor_id: id foreign:users.id onDelete:cascade onUpdate:cascade
+    category_id: id foreign:categories.id onDelete:cascade onUpdate:cascade
+    timestamps
+  
+  Lesson:
+    title: string:200
+    content: text
+    order_number: integer
+    course_id: id foreign onDelete:cascade onUpdate:cascade
+    timestamps
+
+  Enrollment:
+    student_id: id foreign:users.id onDelete:cascade onUpdate:cascade
+    course_id: id foreign onDelete:cascade onUpdate:cascade
+    enrollment_date: timestamps
+    status: enum:activo,completado,cancelado
+    indexes:
+      - unique: student_id, course_id
+    timestamps
+
+controllers:
+     Category:
+      resource: index, create, store, edit, update, destroy
+     Course:
+      resource: index, create, store, edit, update, destroy
+     Lessons:
+      resource: index, create, store, edit, update, destroy
+     Enrollments:
+      resource: index, create, store, edit, update, destroy
